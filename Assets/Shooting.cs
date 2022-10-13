@@ -93,7 +93,10 @@ public class Shooting : MonoBehaviour
     public IEnumerator DelayExplosion(GameObject bullet, float coolDown)
     {
         yield return new WaitForSeconds(coolDown);
-        bullet.GetComponent<Bullet>().explodeBullet();
+        if (bullet != null)
+        {
+            bullet.GetComponent<Bullet>().explodeBullet();
+        }
     }
 
 
