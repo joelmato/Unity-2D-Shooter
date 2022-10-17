@@ -44,7 +44,7 @@ public class Shooting : MonoBehaviour
             if (currentWeapon == 1) ShootShotgun();
         }
 
-        if (Input.GetButtonDown("Reload"))
+        if (Input.GetButtonDown("Reload") && ammoCurrent[currentWeapon] != ammoTotal[currentWeapon])
         {
             Reload();
         }
