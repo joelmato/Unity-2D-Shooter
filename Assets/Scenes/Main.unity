@@ -6036,7 +6036,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a9e8a70567c104c99a499a5c80fcb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 4179040495325879602, guid: 6237eab119848c3479ac817cbb4d6faf, type: 3}
+  pistolBulletPrefab: {fileID: 4179040495325879602, guid: 6237eab119848c3479ac817cbb4d6faf, type: 3}
+  shotgunBulletPrefab: {fileID: 7506030949793572182, guid: d8c402a01da57e843809026e2d233401, type: 3}
+  rifleBulletPrefab: {fileID: 39406596262327666, guid: f1a8707b476761d4d9378b0970843e72, type: 3}
   firePoint: {fileID: 507448204}
   ammoTotalDisplay: {fileID: 92974245}
   ammoCurrentDisplay: {fileID: 643372979}

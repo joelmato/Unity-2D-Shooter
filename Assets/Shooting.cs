@@ -8,8 +8,11 @@ using UnityEngine.UI;
 public class Shooting : MonoBehaviour
 {
 
-    public GameObject bulletPrefab;
+    public GameObject pistolBulletPrefab;
+    public GameObject shotgunBulletPrefab;
+    public GameObject rifleBulletPrefab;
     public Transform firePoint;
+
     public TextMeshProUGUI ammoTotalDisplay;
     public TextMeshProUGUI ammoCurrentDisplay;
     public TextMeshProUGUI reloadingDisplay;
@@ -85,7 +88,7 @@ public class Shooting : MonoBehaviour
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(pistolBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForcePistol, ForceMode2D.Impulse);
 
@@ -105,7 +108,7 @@ public class Shooting : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             float randomAngle = Random.Range(-10f, 10f);
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(shotgunBulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             Vector3 newVector = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * firePoint.up;
             rb.AddForce(newVector * bulletForceShotgun, ForceMode2D.Impulse);
