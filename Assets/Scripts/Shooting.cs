@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
-
     public GameObject pistolBulletPrefab;
     public GameObject shotgunBulletPrefab;
     public GameObject rifleBulletPrefab;
@@ -23,15 +22,11 @@ public class Shooting : MonoBehaviour
     private bool isReloading = false;
     public int currentWeapon = 0;
 
-    private float bulletForcePistol = 20f;
-    private float bulletForceShotgun = 35f;
-    private float bulletForceRifle = 25f;
-
-    public int[] ammoTotal = { 10, 4, 20 }; // Stores all values for total ammo amount per magazine for all weapons, { pistol, shotgun, rifle}
-    public int[] ammoCurrent = { 10, 4, 20 }; // Stores all values for current ammo amount for all weapons, { pistol, shotgun, rifle}
-    public float[] reloadDurations = { 2.0f, 2.5f, 4.0f }; // Stores all values for reload times for all weapons, { pistol, shotgun, rifle}
-    public float[] firerates = { 0.75f, 1.5f, 0.5f }; // Stores all values for time between shots for all weapons, { pistol, shotgun, rifle}
-
+    private int[] ammoTotal = { 10, 4, 40 }; // Stores all values for total ammo amount per magazine for all weapons, { pistol, shotgun, rifle}
+    private int[] ammoCurrent = { 10, 4, 40 }; // Stores all values for current ammo amount for all weapons, { pistol, shotgun, rifle}
+    private float[] bulletForces = { 20f, 35f, 25f }; // Stores all values for bullet forces for all weapons, { pistol, shotgun, rifle}
+    private float[] reloadDurations = { 1.5f, 2.0f, 3.0f }; // Stores all values for reload times for all weapons, { pistol, shotgun, rifle}
+    private float[] firerates = { 0.75f, 1.5f, 0.1f }; // Stores all values for time between shots for all weapons, { pistol, shotgun, rifle}
 
 
     private void Start()
@@ -45,6 +40,11 @@ public class Shooting : MonoBehaviour
         {
             if (currentWeapon == 0) ShootPistol();
             if (currentWeapon == 1) ShootShotgun();
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            if (currentWeapon == 2) ShootRifle();
         }
 
         if (Input.GetButtonDown("Reload") && ammoCurrent[currentWeapon] != ammoTotal[currentWeapon])
@@ -90,7 +90,7 @@ public class Shooting : MonoBehaviour
 
         GameObject bullet = Instantiate(pistolBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForcePistol, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
         StartCoroutine(StartCooldown(firerates[currentWeapon]));
     }
@@ -111,10 +111,27 @@ public class Shooting : MonoBehaviour
             GameObject bullet = Instantiate(shotgunBulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             Vector3 newVector = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * firePoint.up;
-            rb.AddForce(newVector * bulletForceShotgun, ForceMode2D.Impulse);
+            rb.AddForce(newVector * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
             StartCoroutine(DelayExplosion(bullet, 0.2f));
         }
+
+        StartCoroutine(StartCooldown(firerates[currentWeapon]));
+    }
+
+    void ShootRifle()
+    {
+        if (!isAvailable || isReloading || ammoCurrent[2] == 0)
+        {
+            return;
+        }
+
+        ammoCurrent[currentWeapon]--;
+        UpdateAmmoDisplay();
+
+        GameObject bullet = Instantiate(rifleBulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
         StartCoroutine(StartCooldown(firerates[currentWeapon]));
     }
@@ -164,6 +181,5 @@ public class Shooting : MonoBehaviour
             bullet.GetComponent<Bullet>().explodeBullet();
         }
     }
-
 
 }
