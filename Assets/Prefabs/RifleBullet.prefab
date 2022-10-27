@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 640423051957409717}
   - component: {fileID: 2557056964527708909}
   - component: {fileID: 2488759378740239170}
-  - component: {fileID: 2429022140406708937}
   - component: {fileID: 6382714695246525435}
+  - component: {fileID: 2429022140406708937}
+  - component: {fileID: 7818378983328400965}
   m_Layer: 0
   m_Name: RifleBullet
   m_TagString: Bullet
@@ -122,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0012920797, y: 0}
+  m_Offset: {x: -0.000080779195, y: -0.0013729334}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,21 +134,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12752873, y: 0.12068789}
+  m_Size: {x: 0.23461255, y: 0.6176667}
   m_EdgeRadius: 0
---- !u!114 &2429022140406708937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39406596262327666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630f18b6c537ab54d94e0a5efcd279b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
 --- !u!114 &6382714695246525435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +215,28 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2429022140406708937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39406596262327666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630f18b6c537ab54d94e0a5efcd279b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
+--- !u!114 &7818378983328400965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39406596262327666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed9756b7d2009a4188765c00baf5af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
