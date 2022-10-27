@@ -1668,7 +1668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507448203}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: -0.433, z: 0}
+  m_LocalPosition: {x: -0.039, y: -0.433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7858,7 +7858,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: be0493580bc373f40b1c1539545bd1da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5d3f1a8f0bdef346b1965a5ac803b5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7901,6 +7901,11 @@ MonoBehaviour:
   shotgunBulletPrefab: {fileID: 7506030949793572182, guid: d8c402a01da57e843809026e2d233401, type: 3}
   rifleBulletPrefab: {fileID: 39406596262327666, guid: f1a8707b476761d4d9378b0970843e72, type: 3}
   firePoint: {fileID: 507448204}
+  characterSprites:
+  - {fileID: 21300000, guid: f5d3f1a8f0bdef346b1965a5ac803b5c, type: 3}
+  - {fileID: 21300000, guid: dbc801b69e1af014eb065fd158369c48, type: 3}
+  - {fileID: 21300000, guid: 47d71562f1f29894eb6c38c8d5c3b0c0, type: 3}
+  spriteRenderer: {fileID: 1846177498}
   ammoTotalDisplay: {fileID: 92974245}
   ammoCurrentDisplay: {fileID: 643372979}
   reloadingDisplay: {fileID: 152878610}
@@ -7910,21 +7915,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d75bec56c648c514e8be5903b2e5162c, type: 3}
   - {fileID: 21300000, guid: 62cd767b361e1444e936cfc73e9a2a53, type: 3}
   currentWeapon: 0
-  ammoTotal: 0a0000000400000014000000
-  ammoCurrent: 0a0000000400000014000000
-  bulletForces:
-  - 20
-  - 35
-  - 25
-  reloadDurations:
-  - 2
-  - 2.5
-  - 4
-  firerates:
-  - 0.75
-  - 1.5
-  - 0.1
-  canShoot: 1
 --- !u!58 &1846177501
 CircleCollider2D:
   m_ObjectHideFlags: 0

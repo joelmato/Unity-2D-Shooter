@@ -12,6 +12,9 @@ public class Shooting : MonoBehaviour
     public GameObject rifleBulletPrefab;
     public Transform firePoint;
 
+    public Sprite[] characterSprites;
+    public SpriteRenderer spriteRenderer;
+
     public TextMeshProUGUI ammoTotalDisplay;
     public TextMeshProUGUI ammoCurrentDisplay;
     public TextMeshProUGUI reloadingDisplay;
@@ -75,6 +78,7 @@ public class Shooting : MonoBehaviour
             currentWeapon = 2;
         }
         ammoSprite.sprite = ammoSprites[currentWeapon];
+        spriteRenderer.sprite = characterSprites[currentWeapon];
         UpdateAmmoDisplay();
     }
 
