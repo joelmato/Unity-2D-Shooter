@@ -11,6 +11,9 @@ public class PauseMenu : MonoBehaviour
     public Player player;
     public CanvasGroup gameUI;
 
+
+    public GameObject transitionAnimator;
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -45,13 +48,16 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         player.currentHealth = player.maxHealth;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene(SceneManager.GetActiveScene().name));
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1.0f; 
     }
 
     public void Quit()
     {
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("MainMenu"));
+        //SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1.0f;
     }
 }
