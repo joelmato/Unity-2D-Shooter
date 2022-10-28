@@ -11,6 +11,9 @@ public class Shooting : MonoBehaviour
     public GameObject shotgunBulletPrefab;
     public GameObject rifleBulletPrefab;
     public Transform firePoint;
+    public Animator muzzleFlashAnimator;
+
+    public CameraShake cameraShake;
 
     public Sprite[] characterSprites;
     public SpriteRenderer spriteRenderer;
@@ -92,6 +95,9 @@ public class Shooting : MonoBehaviour
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
 
+        muzzleFlashAnimator.SetTrigger("Start");
+        StartCoroutine(cameraShake.Shake(0.10f, 0.15f));
+
         GameObject bullet = Instantiate(pistolBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
@@ -108,6 +114,9 @@ public class Shooting : MonoBehaviour
 
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
+
+        muzzleFlashAnimator.SetTrigger("Start");
+        StartCoroutine(cameraShake.Shake(0.10f, 0.2f));
 
         for (int i = 0; i < 8; i++)
         {
@@ -132,6 +141,9 @@ public class Shooting : MonoBehaviour
 
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
+
+        muzzleFlashAnimator.SetTrigger("Start");
+        StartCoroutine(cameraShake.Shake(0.10f, 0.05f));
 
         GameObject bullet = Instantiate(rifleBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
