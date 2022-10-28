@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        CursorController.instance.SetCrosshair();
     }
 
     public void TakeDamage(int damage)

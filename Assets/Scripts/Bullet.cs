@@ -9,10 +9,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.gameObject.CompareTag(tag))
+        if (collision.collider.gameObject.tag == "ShotgunBullet" && tag == "ShotgunBullet")
         {
-            explodeBullet();
+            return;
         }
+
+        explodeBullet();
 
     }
 

@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     public void Continue()
     {
         pauseMenuUI.SetActive(false);
+        CursorController.instance.SetCrosshair();
         gameUI.alpha = 1.0f;
         Time.timeScale = 1.0f;
         isPaused = false;
@@ -40,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        CursorController.instance.SetPointer();
         gameUI.alpha = 0.5f;
         Time.timeScale = 0f;
         isPaused = true;    

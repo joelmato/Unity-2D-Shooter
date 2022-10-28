@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject transitionAnimator;
+
+    void Start()
+    {
+        CursorController.instance.SetPointer();
+    }
     public void StartGame()
     {
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("Main"));

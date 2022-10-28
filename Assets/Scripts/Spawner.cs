@@ -37,6 +37,11 @@ public class Spawner : MonoBehaviour
             GameObject zombieWP = Instantiate(zombieWithPistolPrefab);
             zombie.transform.position = spawnpoints[0].transform.position;
             zombieWP.transform.position = spawnpoints[1].transform.position;
+
+            GameObject zombie2 = Instantiate(zombieNormalPrefab);
+            GameObject zombieWP2 = Instantiate(zombieWithPistolPrefab);
+            zombie2.transform.position = spawnpoints[2].transform.position;
+            zombieWP2.transform.position = spawnpoints[3].transform.position;
         }
         StartCoroutine(StartCooldown());
     }
