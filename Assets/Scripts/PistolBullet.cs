@@ -11,6 +11,11 @@ public class PistolBullet : MonoBehaviour
         if (collision.collider.gameObject.tag == "ZombieNormal")
         {
             collision.collider.gameObject.GetComponent<ZombieNormal>().TakeDamage(bulletDamage);
+            
+        } 
+        else if (collision.collider.gameObject.tag == "ZombieWithPistol")
+        {
+            collision.collider.gameObject.GetComponent<ZombieWithPistol>().TakeDamage(bulletDamage);
         }
 
     }

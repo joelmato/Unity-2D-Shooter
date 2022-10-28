@@ -11,6 +11,10 @@ public class RifleBullet : MonoBehaviour
         {
             collision.collider.gameObject.GetComponent<ZombieNormal>().TakeDamage(bulletDamage);
         }
+        else if (collision.collider.gameObject.tag == "ZombieWithPistol")
+        {
+            collision.collider.gameObject.GetComponent<ZombieWithPistol>().TakeDamage(bulletDamage);
+        }
     }
 
     // Update is called once per frame

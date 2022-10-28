@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject[] spawnpoints;
     public GameObject zombieNormalPrefab;
+    public GameObject zombieWithPistolPrefab;
 
     private bool canSpawn = true;
     private float spawnRate = 30;
@@ -31,9 +32,11 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < 1; i++)
         {
-            int random = Random.Range(0, spawnpoints.Length);
+            //int random = Random.Range(0, spawnpoints.Length);
             GameObject zombie = Instantiate(zombieNormalPrefab);
-            zombie.transform.position = spawnpoints[random].transform.position;
+            GameObject zombieWP = Instantiate(zombieWithPistolPrefab);
+            zombie.transform.position = spawnpoints[0].transform.position;
+            zombieWP.transform.position = spawnpoints[1].transform.position;
         }
         StartCoroutine(StartCooldown());
     }
