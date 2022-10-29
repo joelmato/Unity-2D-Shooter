@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject transitionAnimator;
+    public GameObject controlsDisplay;
 
     void Start()
     {
@@ -16,6 +17,18 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("Main"));
         //SceneManager.LoadScene("Main");
         Time.timeScale = 1.0f;
+    }
+
+    public void ShowControls()
+    {
+        gameObject.SetActive(false);
+        controlsDisplay.SetActive(true);
+    }
+
+    public void Back()
+    {
+        gameObject.SetActive(true);
+        controlsDisplay.SetActive(false);
     }
 
     public void ExitGame()

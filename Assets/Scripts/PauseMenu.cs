@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject controlsDisplay;
     public Player player;
     public CanvasGroup gameUI;
 
@@ -32,6 +33,7 @@ public class PauseMenu : MonoBehaviour
     public void Continue()
     {
         pauseMenuUI.SetActive(false);
+        controlsDisplay.SetActive(false);
         CursorController.instance.SetCrosshair();
         gameUI.alpha = 1.0f;
         Time.timeScale = 1.0f;
@@ -61,5 +63,22 @@ public class PauseMenu : MonoBehaviour
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("MainMenu"));
         //SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1.0f;
+    }
+
+    public void ShowControls()
+    {
+        controlsDisplay.SetActive(true);
+        pauseMenuUI.SetActive(false);
+    }
+
+    public void Back()
+    {
+        pauseMenuUI.SetActive(true);
+        controlsDisplay.SetActive(false);
+    }
+
+    public bool GetPausedStatus()
+    {
+        return isPaused;
     }
 }

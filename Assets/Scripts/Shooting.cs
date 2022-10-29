@@ -15,6 +15,8 @@ public class Shooting : MonoBehaviour
 
     public CameraShake cameraShake;
 
+    public PauseMenu pauseMenu;
+
     public Sprite[] characterSprites;
     public SpriteRenderer spriteRenderer;
 
@@ -87,7 +89,7 @@ public class Shooting : MonoBehaviour
 
     void ShootPistol()
     {
-        if (!isAvailable || isReloading || ammoCurrent[0] == 0)
+        if (!isAvailable || isReloading || ammoCurrent[0] == 0 || pauseMenu.GetPausedStatus())
         {
             return;
         }
@@ -107,7 +109,7 @@ public class Shooting : MonoBehaviour
 
     void ShootShotgun()
     {
-        if (!isAvailable || isReloading || ammoCurrent[1] == 0)
+        if (!isAvailable || isReloading || ammoCurrent[1] == 0 || pauseMenu.GetPausedStatus())
         {
             return;
         }
@@ -134,7 +136,7 @@ public class Shooting : MonoBehaviour
 
     void ShootRifle()
     {
-        if (!isAvailable || isReloading || ammoCurrent[2] == 0)
+        if (!isAvailable || isReloading || ammoCurrent[2] == 0 || pauseMenu.GetPausedStatus())
         {
             return;
         }
