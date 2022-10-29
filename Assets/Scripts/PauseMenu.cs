@@ -54,15 +54,15 @@ public class PauseMenu : MonoBehaviour
         player.currentHealth = player.maxHealth;
 
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene(SceneManager.GetActiveScene().name));
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1.0f; 
+        Time.timeScale = 1.0f;
+        isPaused = false;
     }
 
     public void Quit()
     {
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("MainMenu"));
-        //SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1.0f;
+        isPaused = false;
     }
 
     public void ShowControls()
