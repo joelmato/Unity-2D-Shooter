@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +7,7 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public Animator animator;
     public CameraShake cameraShake;
+    public AudioSource hurtSound;
 
     public int maxHealth = 100;
     public int currentHealth;
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         animator.SetTrigger("Start");
+        hurtSound.Play();
         StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
         StartCoroutine(WaitBeforeTakingDamage(shakeDuration, damage)); // Delays registering the damage taken until the camera shake is done
     }

@@ -1,16 +1,24 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject transitionAnimator;
     public GameObject controlsDisplay;
+    public GameObject settings;
+    public TMP_Dropdown resolutionDropdown;
+
+    Resolution[] screenResolutions;
 
     void Start()
     {
         CursorController.instance.SetPointer();
+
     }
     public void StartGame()
     {
@@ -23,6 +31,12 @@ public class MainMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         controlsDisplay.SetActive(true);
+    }
+
+    public void ShowSettings()
+    {
+        gameObject.SetActive(false);
+        settings.SetActive(true);
     }
 
     public void Back()
