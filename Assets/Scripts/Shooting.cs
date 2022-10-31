@@ -26,7 +26,7 @@ public class Shooting : MonoBehaviour
     public Image ammoSprite;
     public Sprite[] ammoSprites;
 
-    private bool isAvailable = true;
+    private bool canShoot = true;
     private bool isReloading = false;
     public int currentWeapon = 0;
 
@@ -65,31 +65,37 @@ public class Shooting : MonoBehaviour
 
     void SwitchWeapon()
     {
-        if (!isAvailable || isReloading)
+        if (isReloading)
         {
             return;
         }
 
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown("1") && currentWeapon != 0)
         {
             currentWeapon = 0;
         }
-        else if (Input.GetKeyDown("2"))
+        else if (Input.GetKeyDown("2") && currentWeapon != 1)
         {
             currentWeapon = 1;
         }
-        else if (Input.GetKeyDown("3"))
+        else if (Input.GetKeyDown("3") && currentWeapon != 2)
         {
             currentWeapon = 2;
+        } 
+        else
+        {
+            return;
         }
+
         ammoSprite.sprite = ammoSprites[currentWeapon];
         spriteRenderer.sprite = characterSprites[currentWeapon];
         UpdateAmmoDisplay();
+        canShoot = true;
     }
 
     void ShootPistol()
     {
-        if (!isAvailable || isReloading || ammoCurrent[0] == 0 || pauseMenu.GetPausedStatus())
+        if (!canShoot || isReloading || ammoCurrent[0] == 0 || pauseMenu.GetPausedStatus())
         {
             return;
         }
@@ -109,7 +115,7 @@ public class Shooting : MonoBehaviour
 
     void ShootShotgun()
     {
-        if (!isAvailable || isReloading || ammoCurrent[1] == 0 || pauseMenu.GetPausedStatus())
+        if (!canShoot || isReloading || ammoCurrent[1] == 0 || pauseMenu.GetPausedStatus())
         {
             return;
         }
@@ -136,7 +142,7 @@ public class Shooting : MonoBehaviour
 
     void ShootRifle()
     {
-        if (!isAvailable || isReloading || ammoCurrent[2] == 0 || pauseMenu.GetPausedStatus())
+        if (!canShoot || isReloading || ammoCurrent[2] == 0 || pauseMenu.GetPausedStatus())
         {
             return;
         }
@@ -186,9 +192,9 @@ public class Shooting : MonoBehaviour
 
     public IEnumerator StartCooldown(float time)
     {
-        isAvailable = false;
+        canShoot = false;
         yield return new WaitForSeconds(time);
-        isAvailable = true;
+        canShoot = true;
     }
 
     public IEnumerator DelayExplosion(GameObject bullet, float time)
