@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject settings;
     public GameObject controlsDisplay;
     public Player player;
     public CanvasGroup gameUI;
@@ -34,6 +35,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         controlsDisplay.SetActive(false);
+        settings.SetActive(false);
         CursorController.instance.SetCrosshair();
         gameUI.alpha = 1.0f;
         Time.timeScale = 1.0f;
@@ -69,6 +71,11 @@ public class PauseMenu : MonoBehaviour
     {
         controlsDisplay.SetActive(true);
         pauseMenuUI.SetActive(false);
+    }
+    public void ShowSettings()
+    {
+        pauseMenuUI.SetActive(false);
+        settings.SetActive(true);
     }
 
     public void Back()
