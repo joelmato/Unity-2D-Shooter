@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1354278981831285077}
   - component: {fileID: 1354278981831285082}
   - component: {fileID: 60840516}
+  - component: {fileID: -8718811302434357868}
   m_Layer: 0
   m_Name: ZombieNormal
   m_TagString: ZombieNormal
@@ -139,7 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1354278981831285076}
   animator: {fileID: 60840516}
-  hurtSound: {fileID: 0}
   movementSpeed: 1
 --- !u!95 &60840516
 Animator:
@@ -161,3 +161,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8718811302434357868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354278981831285083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.373044, y: -0.11219869, z: 0}
+  - {x: -0.36106443, y: 0.17023584, z: 0}
+  - {x: -0.2979126, y: 0.23338786, z: 0}
+  - {x: -0.24025202, y: 0.30477712, z: 0}
+  - {x: -0.1094532, y: 0.36755255, z: 0}
+  - {x: 0.113948345, y: 0.36518335, z: 0}
+  - {x: 0.24124861, y: 0.3071462, z: 0}
+  - {x: 0.30340433, y: 0.2416251, z: 0}
+  - {x: 0.3693018, y: 0.17298159, z: 0}
+  - {x: 0.36655617, y: -0.11806681, z: 0}
+  - {x: 0.30440044, y: -0.30714622, z: 0}
+  - {x: 0.18533754, y: -0.37067485, z: 0}
+  - {x: -0.19357443, y: -0.3734206, z: 0}
+  - {x: -0.30065823, y: -0.29928562, z: 0}
+  m_ShapePathHash: 523652237
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 55864

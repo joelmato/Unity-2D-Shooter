@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Rendering.Universal;
 
 public class Bullet : MonoBehaviour
 {
@@ -27,11 +28,16 @@ public class Bullet : MonoBehaviour
 
     public void explodeBullet()
     {
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        GameObject explosionEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(explosionEffect, 0.3f);
+
+        // Disables components of the bullet in order to make it unable to interact with other objects and to make it invisible
         gameObject.GetComponent<Rigidbody2D>().Sleep();
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
-        Destroy(effect, 0.3f);
+        gameObject.GetComponent<Light2D>().enabled = false;
+
+        // Destroys the bullet after the bullet shot sound effect has finished playing
         Destroy(gameObject, shotSound.clip.length);
     }
 

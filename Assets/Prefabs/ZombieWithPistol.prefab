@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5842354903467988224}
   - component: {fileID: 5842354903467988227}
   - component: {fileID: 5842354903467988226}
+  - component: {fileID: -989767318407038820}
   m_Layer: 0
   m_Name: ZombieWithPistol
   m_TagString: ZombieWithPistol
@@ -143,7 +144,6 @@ MonoBehaviour:
   pistolBulletPrefab: {fileID: 1676337826304788629, guid: 98e8ffb3483642043bbb5f374fa3c80f, type: 3}
   firePoint: {fileID: 5842354904531998748}
   muzzleFlashAnimator: {fileID: 5842354904531998747}
-  hurtSound: {fileID: 0}
   movementSpeed: 1
 --- !u!95 &5842354903467988226
 Animator:
@@ -165,6 +165,49 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-989767318407038820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5842354903467988229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.30562663, y: -0.12400544, z: 0}
+  - {x: -0.37024903, y: 0.009335041, z: 0}
+  - {x: -0.37204385, y: 0.24446502, z: 0}
+  - {x: -0.30922294, y: 0.30728602, z: 0}
+  - {x: -0.24164033, y: 0.37275553, z: 0}
+  - {x: -0.11735821, y: 0.43441105, z: 0}
+  - {x: 0.11938, y: 0.43609706, z: 0}
+  - {x: 0.24718904, y: 0.37190276, z: 0}
+  - {x: 0.30821514, y: 0.30190223, z: 0}
+  - {x: 0.3728311, y: 0.24446587, z: 0}
+  - {x: 0.37103617, y: 0.0057461113, z: 0}
+  - {x: 0.30821514, y: -0.12348565, z: 0}
+  - {x: 0.24477386, y: -0.24291044, z: 0}
+  - {x: 0.18436813, y: -0.31015372, z: 0}
+  - {x: 0.05872631, y: -0.31015372, z: 0}
+  - {x: 0.051546335, y: -0.43041104, z: 0}
+  - {x: -0.06691599, y: -0.43220598, z: 0}
+  - {x: -0.068710804, y: -0.30835885, z: 0}
+  - {x: -0.18178606, y: -0.30476993, z: 0}
+  - {x: -0.24460697, y: -0.24015404, z: 0}
+  m_ShapePathHash: -1298519951
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 56314
 --- !u!1 &5842354904531998751
 GameObject:
   m_ObjectHideFlags: 0
