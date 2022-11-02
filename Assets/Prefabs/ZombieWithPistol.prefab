@@ -143,6 +143,7 @@ MonoBehaviour:
   pistolBulletPrefab: {fileID: 1676337826304788629, guid: 98e8ffb3483642043bbb5f374fa3c80f, type: 3}
   firePoint: {fileID: 5842354904531998748}
   muzzleFlashAnimator: {fileID: 5842354904531998747}
+  hurtSound: {fileID: 0}
   movementSpeed: 1
 --- !u!95 &5842354903467988226
 Animator:

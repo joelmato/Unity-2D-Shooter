@@ -109,7 +109,6 @@ public class Settings : MonoBehaviour
     private void UpdateMasterSlider()
     {
         bool value = audioMixer.GetFloat("VolumeMaster", out masterVolume);
-        Debug.Log(masterVolume);
         if (value)
         {
             masterSlider.value = DBToDecimal(masterVolume);
@@ -123,11 +122,9 @@ public class Settings : MonoBehaviour
     private void UpdateSFXSlider()
     {
         bool value = audioMixer.GetFloat("VolumeSFX", out sfxVolume);
-        Debug.Log(sfxVolume);
         if (value)
         {
             float test = DBToDecimal(sfxVolume);
-            Debug.Log(test);
             sfxSlider.value = test;
         }
         else
@@ -139,7 +136,6 @@ public class Settings : MonoBehaviour
     private void UpdateMusicSlider()
     {
         bool value = audioMixer.GetFloat("VolumeMusic", out musicVolume);
-        Debug.Log(musicVolume);
         if (value)
         {
             musicSlider.value = DBToDecimal(musicVolume);

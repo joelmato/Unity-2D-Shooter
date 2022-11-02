@@ -26,8 +26,8 @@ public class Shooting : MonoBehaviour
     public Image ammoSprite;
     public Sprite[] ammoSprites;
 
-    private bool canShoot = true;
-    private bool isReloading = false;
+    public bool canShoot = true;
+    public bool isReloading = false;
     public int currentWeapon = 0;
 
     private int[] ammoTotal = { 10, 4, 40 }; // Stores all values for total ammo amount per magazine for all weapons, { pistol, shotgun, rifle}
@@ -36,6 +36,8 @@ public class Shooting : MonoBehaviour
     private float[] reloadDurations = { 1.5f, 2.0f, 3.0f }; // Stores all values for reload times for all weapons, { pistol, shotgun, rifle}
     private float[] firerates = { 0.75f, 1.5f, 0.1f }; // Stores all values for time between shots for all weapons, { pistol, shotgun, rifle}
 
+    private IEnumerator shootingCooldown;
+    private bool inCoroutine = false;
 
     private void Start()
     {
@@ -44,20 +46,20 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && CheckIfCanShoot())
         {
             if (currentWeapon == 0) ShootPistol();
             if (currentWeapon == 1) ShootShotgun();
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && CheckIfCanShoot())
         {
             if (currentWeapon == 2) ShootRifle();
         }
 
         if (Input.GetButtonDown("Reload") && ammoCurrent[currentWeapon] != ammoTotal[currentWeapon])
         {
-            Reload();
+            StartCoroutine(StartReloadTimer(reloadDurations[currentWeapon]));
         }
 
         SwitchWeapon();
@@ -95,11 +97,6 @@ public class Shooting : MonoBehaviour
 
     void ShootPistol()
     {
-        if (!canShoot || isReloading || ammoCurrent[0] == 0 || pauseMenu.GetPausedStatus())
-        {
-            return;
-        }
-
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
 
@@ -110,16 +107,11 @@ public class Shooting : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
-        StartCoroutine(StartCooldown(firerates[currentWeapon]));
+        WeaponCooldown();
     }
 
     void ShootShotgun()
     {
-        if (!canShoot || isReloading || ammoCurrent[1] == 0 || pauseMenu.GetPausedStatus())
-        {
-            return;
-        }
-
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
 
@@ -137,16 +129,11 @@ public class Shooting : MonoBehaviour
             StartCoroutine(DelayExplosion(bullet, 0.2f));
         }
 
-        StartCoroutine(StartCooldown(firerates[currentWeapon]));
+        WeaponCooldown();
     }
 
     void ShootRifle()
     {
-        if (!canShoot || isReloading || ammoCurrent[2] == 0 || pauseMenu.GetPausedStatus())
-        {
-            return;
-        }
-
         ammoCurrent[currentWeapon]--;
         UpdateAmmoDisplay();
 
@@ -157,21 +144,16 @@ public class Shooting : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
-        StartCoroutine(StartCooldown(firerates[currentWeapon]));
+        WeaponCooldown();
     }
-
-    void Reload()
-    {
-        StartCoroutine(StartReloadTimer(reloadDurations[currentWeapon]));
-    }
-
 
     void UpdateAmmoDisplay()
     {
         if (ammoCurrent[currentWeapon] == 0)
         {
             ammoCurrentDisplay.color = Color.red;
-        } else
+        } 
+        else
         {
             ammoCurrentDisplay.color = Color.white;
         }
@@ -193,8 +175,10 @@ public class Shooting : MonoBehaviour
     public IEnumerator StartCooldown(float time)
     {
         canShoot = false;
+        inCoroutine = true;
         yield return new WaitForSeconds(time);
         canShoot = true;
+        inCoroutine = false;
     }
 
     public IEnumerator DelayExplosion(GameObject bullet, float time)
@@ -204,6 +188,21 @@ public class Shooting : MonoBehaviour
         {
             bullet.GetComponent<Bullet>().explodeBullet();
         }
+    }
+
+    private void WeaponCooldown()
+    {
+        if (inCoroutine)
+        {
+            StopCoroutine(shootingCooldown);
+        }
+        shootingCooldown = StartCooldown(firerates[currentWeapon]);
+        StartCoroutine(shootingCooldown);
+    }
+
+    private bool CheckIfCanShoot()
+    {
+        return (canShoot && !isReloading && ammoCurrent[currentWeapon] != 0 && !pauseMenu.GetPausedStatus());
     }
 
 }

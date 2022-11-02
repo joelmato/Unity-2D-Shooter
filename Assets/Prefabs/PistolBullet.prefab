@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
+  shotSound: {fileID: 6426426162113928826}
 --- !u!114 &-8059500781787961931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,10 +251,10 @@ AudioSource:
   m_GameObject: {fileID: 4179040495325879602}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2474064659899927169, guid: 0cd2356f88c2a704a9a3e7108830491f, type: 2}
   m_audioClip: {fileID: 8300000, guid: 313cd5bcb7911424385239ee92e34a00, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0

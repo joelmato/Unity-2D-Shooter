@@ -18,7 +18,6 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         CursorController.instance.SetPointer();
-        Time.timeScale = 1.0f;
 
     }
     public void StartGame()

@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour
 
     public GameObject transitionAnimator;
     public Player player;
+    public Shooting shootingScript;
     public GameObject gameOverUI;
     public CanvasGroup gameUI;
 
@@ -22,6 +23,8 @@ public class GameOver : MonoBehaviour
             gameOverUI.SetActive(true);
             gameUI.alpha = 0.5f;
             Time.timeScale = 0f;
+            shootingScript.canShoot = false;
+            shootingScript.isReloading = true;
             gameOver = true;
 
         }

@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1354278981831285076}
   animator: {fileID: 60840516}
+  hurtSound: {fileID: 0}
   movementSpeed: 1
 --- !u!95 &60840516
 Animator:
