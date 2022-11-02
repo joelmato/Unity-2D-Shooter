@@ -8,6 +8,9 @@ public class ZombieNormal : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
 
+    public GameObject zombieHealthBarPrefab;
+    private GameObject healthbar;
+
     private int health = 100;
 
     public float movementSpeed = 1.5f;
@@ -17,16 +20,24 @@ public class ZombieNormal : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        healthbar = Instantiate(zombieHealthBarPrefab);
+        healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
+        healthbar.GetComponent<HealthBar>().SetHealth(health);
+        MoveHealthBar();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveTowardsPlayer();
+        MoveHealthBar();
 
-        if(health <= 0)
+        if (health <= 0)
         {
             Destroy(this.gameObject);
+            Destroy(healthbar);
         }
     }
 
@@ -52,6 +63,7 @@ public class ZombieNormal : MonoBehaviour
     {
         animator.SetTrigger("Start");
         health -= damage;
+        healthbar.GetComponent<HealthBar>().SetHealth(health);
     }
 
     IEnumerator AttackCooldown()
@@ -59,6 +71,11 @@ public class ZombieNormal : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCooldownTime);
         canAttack = true;
+    }
+
+    private void MoveHealthBar()
+    {
+        healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
     }
 
 }

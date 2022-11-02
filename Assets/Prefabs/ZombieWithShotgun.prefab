@@ -208,6 +208,7 @@ MonoBehaviour:
   shotgunBulletPrefab: {fileID: 7547328611337631377, guid: 778325fe6919260458b39cc2dbcc8eb3, type: 3}
   firePoint: {fileID: 1893201487601273005}
   muzzleFlashAnimator: {fileID: 1893201487601273002}
+  zombieHealthBarPrefab: {fileID: 4909515770331329600, guid: b10e22187fe9e4d46a3d66cde87cc867, type: 3}
   movementSpeed: 1.2
 --- !u!1 &1893201487601273001
 GameObject:

@@ -12,6 +12,9 @@ public class ZombieWithPistol : MonoBehaviour
     public Transform firePoint;
     public Animator muzzleFlashAnimator;
 
+    public GameObject zombieHealthBarPrefab;
+    private GameObject healthbar;
+
     private int health = 150;
 
     public float movementSpeed = 1.0f;
@@ -22,15 +25,22 @@ public class ZombieWithPistol : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        healthbar = Instantiate(zombieHealthBarPrefab);
+        healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
+        healthbar.GetComponent<HealthBar>().SetHealth(health);
+        MoveHealthBar();
     }
 
     void Update()
     {
         MoveTowardsPlayer();
+        MoveHealthBar();
 
         if (health <= 0)
         {
             Destroy(this.gameObject);
+            Destroy(healthbar);
         }
 
         if (!(Vector3.Distance(transform.position, player.transform.position) > 6))
@@ -54,6 +64,7 @@ public class ZombieWithPistol : MonoBehaviour
     {
         animator.SetTrigger("Start");
         health -= damage;
+        healthbar.GetComponent<HealthBar>().SetHealth(health);
     }
 
     void Shoot()
@@ -77,5 +88,10 @@ public class ZombieWithPistol : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCooldownTime);
         canAttack = true;
+    }
+
+    private void MoveHealthBar()
+    {
+        healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
     }
 }

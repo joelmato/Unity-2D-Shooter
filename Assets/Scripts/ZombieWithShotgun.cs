@@ -12,6 +12,9 @@ public class ZombieWithShotgun : MonoBehaviour
     public Transform firePoint;
     public Animator muzzleFlashAnimator;
 
+    public GameObject zombieHealthBarPrefab;
+    private GameObject healthbar;
+
     private int health = 200;
 
     public float movementSpeed = 1.2f;
@@ -22,15 +25,22 @@ public class ZombieWithShotgun : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        healthbar = Instantiate(zombieHealthBarPrefab);
+        healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
+        healthbar.GetComponent<HealthBar>().SetHealth(health);
+        MoveHealthBar();
     }
 
     void Update()
     {
         MoveTowardsPlayer();
+        MoveHealthBar();
 
         if (health <= 0)
         {
             Destroy(this.gameObject);
+            Destroy(healthbar);
         }
 
         if (!(Vector3.Distance(transform.position, player.transform.position) > 5))
@@ -53,6 +63,7 @@ public class ZombieWithShotgun : MonoBehaviour
     {
         animator.SetTrigger("Start");
         health -= damage;
+        healthbar.GetComponent<HealthBar>().SetHealth(health);
     }
 
     void Shoot()
@@ -92,5 +103,10 @@ public class ZombieWithShotgun : MonoBehaviour
         {
             bullet.GetComponent<Bullet>().explodeBullet();
         }
+    }
+
+    private void MoveHealthBar()
+    {
+        healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
     }
 }
