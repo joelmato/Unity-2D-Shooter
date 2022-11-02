@@ -8,6 +8,7 @@ TagManager:
   - ZombieNormal
   - ZombieWithPistol
   - ShotgunBullet
+  - ZombieWithShotgun
   layers:
   - Default
   - TransparentFX

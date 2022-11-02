@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3797644489324734218}
   - component: {fileID: 3838849397920933541}
   - component: {fileID: 5718579195918077468}
-  - component: {fileID: 3925470419304793902}
-  - component: {fileID: -624535937117450239}
   - component: {fileID: 3546048990657929956}
+  - component: {fileID: 3925470419304793902}
+  - component: {fileID: -8711106907352315028}
   m_Layer: 0
   m_Name: ZombiePistolBullet
   m_TagString: Bullet
@@ -216,32 +216,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &3925470419304793902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676337826304788629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630f18b6c537ab54d94e0a5efcd279b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
-  shotSound: {fileID: 3546048990657929956}
---- !u!114 &-624535937117450239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676337826304788629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6489c029c5b3ae54d986718658fda9a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &3546048990657929956
 AudioSource:
   m_ObjectHideFlags: 0
@@ -338,3 +312,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3925470419304793902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676337826304788629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630f18b6c537ab54d94e0a5efcd279b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
+  shotSound: {fileID: 3546048990657929956}
+--- !u!114 &-8711106907352315028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676337826304788629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9dacbf0329c204c936bfdfcdd8307c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDamage: 25

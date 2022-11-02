@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2488759378740239170}
   - component: {fileID: 6382714695246525435}
   - component: {fileID: 2429022140406708937}
-  - component: {fileID: 7818378983328400965}
+  - component: {fileID: -4080317319765327929}
   - component: {fileID: 3945534416783897528}
   m_Layer: 0
   m_Name: RifleBullet
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
   shotSound: {fileID: 3945534416783897528}
---- !u!114 &7818378983328400965
+--- !u!114 &-4080317319765327929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,9 +239,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 39406596262327666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ed9756b7d2009a4188765c00baf5af2, type: 3}
+  m_Script: {fileID: 11500000, guid: 19e5058ebbd969340ba978ac34a950b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletDamage: 10
 --- !u!82 &3945534416783897528
 AudioSource:
   m_ObjectHideFlags: 0

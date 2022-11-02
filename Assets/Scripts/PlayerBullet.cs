@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotgunBullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
-
-    private int bulletDamage = 10;
+    public int bulletDamage = 10;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.tag == "ZombieNormal")
@@ -16,11 +15,9 @@ public class ShotgunBullet : MonoBehaviour
         {
             collision.collider.gameObject.GetComponent<ZombieWithPistol>().TakeDamage(bulletDamage);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        else if (collision.collider.gameObject.tag == "ZombieWithShotgun")
+        {
+            collision.collider.gameObject.GetComponent<ZombieWithShotgun>().TakeDamage(bulletDamage);
+        }
     }
 }

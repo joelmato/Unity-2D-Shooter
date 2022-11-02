@@ -10,7 +10,7 @@ public class ZombieNormal : MonoBehaviour
 
     private int health = 100;
 
-    public float movementSpeed = 1.0f;
+    public float movementSpeed = 1.5f;
     private bool canAttack = true;
     private float attackCooldownTime = 2.0f;
 

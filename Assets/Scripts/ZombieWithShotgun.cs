@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieWithPistol : MonoBehaviour
+public class ZombieWithShotgun : MonoBehaviour
 {
     private GameObject player;
     public Rigidbody2D rb;
     public Animator animator;
 
-    public GameObject pistolBulletPrefab;
+    public GameObject shotgunBulletPrefab;
     public Transform firePoint;
     public Animator muzzleFlashAnimator;
 
-    private int health = 150;
+    private int health = 200;
 
-    public float movementSpeed = 1.0f;
+    public float movementSpeed = 1.2f;
     private bool canAttack = true;
-    private float attackCooldownTime = 0.75f;
-    private float bulletForce = 5f;
+    private float attackCooldownTime = 1.5f;
+    private float bulletForce = 4f;
 
     void Start()
     {
@@ -33,15 +33,14 @@ public class ZombieWithPistol : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (!(Vector3.Distance(transform.position, player.transform.position) > 6))
+        if (!(Vector3.Distance(transform.position, player.transform.position) > 5))
         {
             Shoot();
         }
     }
-
     void MoveTowardsPlayer()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) > 6)
+        if (Vector3.Distance(transform.position, player.transform.position) > 5)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
         }
@@ -65,9 +64,16 @@ public class ZombieWithPistol : MonoBehaviour
 
         muzzleFlashAnimator.SetTrigger("Start");
 
-        GameObject bullet = Instantiate(pistolBulletPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        for (float i = -25.0f; i <= 25.0f; i += 25.0f)
+        {
+            float randomAngle = Random.Range(-10f, 10f);
+            GameObject bullet = Instantiate(shotgunBulletPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            Vector3 newVector = Quaternion.AngleAxis(i, new Vector3(0, 0, 1)) * firePoint.up;
+            rb.AddForce(newVector * bulletForce, ForceMode2D.Impulse);
+
+            StartCoroutine(player.GetComponent<Shooting>().DelayExplosion(bullet, 1.5f));
+        }
 
         StartCoroutine(AttackCooldown(attackCooldownTime));
     }
@@ -77,5 +83,14 @@ public class ZombieWithPistol : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCooldownTime);
         canAttack = true;
+    }
+
+    public IEnumerator DelayExplosion(GameObject bullet, float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (bullet != null)
+        {
+            bullet.GetComponent<Bullet>().explodeBullet();
+        }
     }
 }

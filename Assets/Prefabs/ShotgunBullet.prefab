@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5345524330115009382}
   - component: {fileID: 3473737958435644383}
   - component: {fileID: 5265651010785602285}
-  - component: {fileID: 6932916129891982138}
+  - component: {fileID: -5246604743806378529}
   - component: {fileID: 2909106772416129196}
   m_Layer: 0
   m_Name: ShotgunBullet
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 6503540566546033851, guid: b71eb0437ea6c0b4ba9b9d9a3ae84f11, type: 3}
   shotSound: {fileID: 2909106772416129196}
---- !u!114 &6932916129891982138
+--- !u!114 &-5246604743806378529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,9 +239,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7506030949793572182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72db0fdf8b836e245b9d900e234350e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 19e5058ebbd969340ba978ac34a950b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletDamage: 10
 --- !u!82 &2909106772416129196
 AudioSource:
   m_ObjectHideFlags: 0
