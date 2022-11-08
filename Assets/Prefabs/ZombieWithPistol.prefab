@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5842354903467988478}
   - component: {fileID: 5842354903467988225}
   - component: {fileID: 5842354903467988224}
+  - component: {fileID: 1603658778528276001}
   - component: {fileID: 5842354903467988227}
   - component: {fileID: 5842354903467988226}
   - component: {fileID: -989767318407038820}
   m_Layer: 0
   m_Name: ZombieWithPistol
-  m_TagString: ZombieWithPistol
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +128,23 @@ CircleCollider2D:
   m_Offset: {x: 0.004613161, y: 0.07380861}
   serializedVersion: 2
   m_Radius: 0.3579883
+--- !u!114 &1603658778528276001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5842354903467988229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6074e8a775cad489f4e613660644e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 5842354903467988225}
+  animator: {fileID: 5842354903467988226}
+  zombieHealthBarPrefab: {fileID: 4909515770331329600, guid: b10e22187fe9e4d46a3d66cde87cc867, type: 3}
+  health: 150
+  canAttack: 1
 --- !u!114 &5842354903467988227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,11 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5842354903467988225}
-  animator: {fileID: 5842354903467988226}
   pistolBulletPrefab: {fileID: 1676337826304788629, guid: 98e8ffb3483642043bbb5f374fa3c80f, type: 3}
   firePoint: {fileID: 5842354904531998748}
   muzzleFlashAnimator: {fileID: 5842354904531998747}
-  zombieHealthBarPrefab: {fileID: 4909515770331329600, guid: b10e22187fe9e4d46a3d66cde87cc867, type: 3}
+  universalZomieScript: {fileID: 1603658778528276001}
   movementSpeed: 1
 --- !u!95 &5842354903467988226
 Animator:
@@ -208,7 +225,7 @@ MonoBehaviour:
   - {x: -0.24460697, y: -0.24015404, z: 0}
   m_ShapePathHash: -1298519951
   m_Mesh: {fileID: 0}
-  m_InstanceId: 56314
+  m_InstanceId: 74738
 --- !u!1 &5842354904531998751
 GameObject:
   m_ObjectHideFlags: 0

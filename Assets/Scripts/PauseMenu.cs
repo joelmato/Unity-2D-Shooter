@@ -83,9 +83,4 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         controlsDisplay.SetActive(false);
     }
-
-    public bool GetPausedStatus()
-    {
-        return isPaused;
-    }
 }

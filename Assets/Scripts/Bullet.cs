@@ -12,13 +12,14 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.tag == "ShotgunBullet" && tag == "ShotgunBullet")
+        if ((collision.collider.gameObject.tag == "ShotgunBullet" && tag == "ShotgunBullet") 
+            || (collision.collider.gameObject.tag == "ZombieShotgunBullet" && tag == "ZombieShotgunBullet"))
         {
             return;
         }
 
         explodeBullet();
-
+       
     }
 
     private void Awake()
@@ -39,6 +40,15 @@ public class Bullet : MonoBehaviour
 
         // Destroys the bullet after the bullet shot sound effect has finished playing
         Destroy(gameObject, shotSound.clip.length);
+        
+    }
+    public IEnumerator DelayExplosion(GameObject bullet, float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (bullet != null)
+        {
+            bullet.GetComponent<Bullet>().explodeBullet();
+        }
     }
 
 }

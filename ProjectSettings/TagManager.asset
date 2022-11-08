@@ -9,6 +9,8 @@ TagManager:
   - ZombieWithPistol
   - ShotgunBullet
   - ZombieWithShotgun
+  - ZombieShotgunBullet
+  - Zombie
   layers:
   - Default
   - TransparentFX

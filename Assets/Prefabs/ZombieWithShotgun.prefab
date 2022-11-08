@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 1893201487420287124}
   - component: {fileID: 1893201487420287123}
   - component: {fileID: 1893201487420287122}
+  - component: {fileID: -5324326344852796242}
   - component: {fileID: 1893201487420287121}
   m_Layer: 0
   m_Name: ZombieWithShotgun
-  m_TagString: ZombieWithShotgun
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,7 +191,24 @@ MonoBehaviour:
   - {x: -0.24460697, y: -0.24015404, z: 0}
   m_ShapePathHash: -845958637
   m_Mesh: {fileID: 0}
-  m_InstanceId: -133814
+  m_InstanceId: 76008
+--- !u!114 &-5324326344852796242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893201487420287120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6074e8a775cad489f4e613660644e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1893201487420287125}
+  animator: {fileID: 1893201487420287123}
+  zombieHealthBarPrefab: {fileID: 4909515770331329600, guid: b10e22187fe9e4d46a3d66cde87cc867, type: 3}
+  health: 200
+  canAttack: 1
 --- !u!114 &1893201487420287121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,11 +222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1893201487420287125}
-  animator: {fileID: 1893201487420287123}
+  universalZomieScript: {fileID: -5324326344852796242}
   shotgunBulletPrefab: {fileID: 7547328611337631377, guid: 778325fe6919260458b39cc2dbcc8eb3, type: 3}
   firePoint: {fileID: 1893201487601273005}
   muzzleFlashAnimator: {fileID: 1893201487601273002}
-  zombieHealthBarPrefab: {fileID: 4909515770331329600, guid: b10e22187fe9e4d46a3d66cde87cc867, type: 3}
   movementSpeed: 1.2
 --- !u!1 &1893201487601273001
 GameObject:

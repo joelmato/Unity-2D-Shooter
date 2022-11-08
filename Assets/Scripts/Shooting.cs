@@ -15,16 +15,8 @@ public class Shooting : MonoBehaviour
 
     public CameraShake cameraShake;
 
-    public PauseMenu pauseMenu;
-
-    public Sprite[] characterSprites;
-    public SpriteRenderer spriteRenderer;
-
-    public TextMeshProUGUI ammoTotalDisplay;
-    public TextMeshProUGUI ammoCurrentDisplay;
-    public TextMeshProUGUI reloadingDisplay;
-    public Image ammoSprite;
-    public Sprite[] ammoSprites;
+    public AmmoDisplay ammoDisplay;
+    public ReloadingProgressBar reloadingProgressBar;
 
     public bool canShoot = true;
     public bool isReloading = false;
@@ -41,7 +33,7 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
-        UpdateAmmoDisplay();
+        ammoDisplay.UpdateAmmoDisplay(ammoCurrent[currentWeapon], ammoTotal[currentWeapon]);
     }
 
     void Update()
@@ -57,17 +49,19 @@ public class Shooting : MonoBehaviour
             if (currentWeapon == 2) ShootRifle();
         }
 
-        if (Input.GetButtonDown("Reload") && ammoCurrent[currentWeapon] != ammoTotal[currentWeapon])
+        if (Input.GetButtonDown("Reload") && ammoCurrent[currentWeapon] != ammoTotal[currentWeapon] && !isReloading)
         {
             StartCoroutine(StartReloadTimer(reloadDurations[currentWeapon]));
+            reloadingProgressBar.StartTimer(reloadDurations[currentWeapon]);
         }
 
         SwitchWeapon();
+        ammoDisplay.UpdateAmmoDisplay(ammoCurrent[currentWeapon], ammoTotal[currentWeapon]);
     }
 
     void SwitchWeapon()
     {
-        if (isReloading)
+        if (isReloading || Time.timeScale == 0f)
         {
             return;
         }
@@ -89,16 +83,13 @@ public class Shooting : MonoBehaviour
             return;
         }
 
-        ammoSprite.sprite = ammoSprites[currentWeapon];
-        spriteRenderer.sprite = characterSprites[currentWeapon];
-        UpdateAmmoDisplay();
+        ammoDisplay.UpdateAmmoSprite(currentWeapon);
         canShoot = true;
     }
 
     void ShootPistol()
     {
         ammoCurrent[currentWeapon]--;
-        UpdateAmmoDisplay();
 
         muzzleFlashAnimator.SetTrigger("Start");
         StartCoroutine(cameraShake.Shake(0.10f, 0.15f));
@@ -113,7 +104,6 @@ public class Shooting : MonoBehaviour
     void ShootShotgun()
     {
         ammoCurrent[currentWeapon]--;
-        UpdateAmmoDisplay();
 
         muzzleFlashAnimator.SetTrigger("Start");
         StartCoroutine(cameraShake.Shake(0.10f, 0.2f));
@@ -126,7 +116,7 @@ public class Shooting : MonoBehaviour
             Vector3 newVector = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * firePoint.up;
             rb.AddForce(newVector * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
-            StartCoroutine(DelayExplosion(bullet, 0.2f));
+            StartCoroutine(bullet.GetComponent<Bullet>().DelayExplosion(bullet, 0.2f));
         }
 
         WeaponCooldown();
@@ -135,7 +125,6 @@ public class Shooting : MonoBehaviour
     void ShootRifle()
     {
         ammoCurrent[currentWeapon]--;
-        UpdateAmmoDisplay();
 
         muzzleFlashAnimator.SetTrigger("Start");
         StartCoroutine(cameraShake.Shake(0.10f, 0.05f));
@@ -147,47 +136,12 @@ public class Shooting : MonoBehaviour
         WeaponCooldown();
     }
 
-    void UpdateAmmoDisplay()
-    {
-        if (ammoCurrent[currentWeapon] == 0)
-        {
-            ammoCurrentDisplay.color = Color.red;
-        } 
-        else
-        {
-            ammoCurrentDisplay.color = Color.white;
-        }
-        ammoTotalDisplay.text = ammoTotal[currentWeapon].ToString();
-        ammoCurrentDisplay.text = ammoCurrent[currentWeapon].ToString();
-    }
-
     public IEnumerator StartReloadTimer(float time)
     {
-        reloadingDisplay.text = "Reloading";
         isReloading = true;
         yield return new WaitForSeconds(time);
         ammoCurrent[currentWeapon] = ammoTotal[currentWeapon];
         isReloading = false;
-        reloadingDisplay.text = "";
-        UpdateAmmoDisplay();
-    }
-
-    public IEnumerator StartCooldown(float time)
-    {
-        canShoot = false;
-        inCoroutine = true;
-        yield return new WaitForSeconds(time);
-        canShoot = true;
-        inCoroutine = false;
-    }
-
-    public IEnumerator DelayExplosion(GameObject bullet, float time)
-    {
-        yield return new WaitForSeconds(time);
-        if (bullet != null)
-        {
-            bullet.GetComponent<Bullet>().explodeBullet();
-        }
     }
 
     private void WeaponCooldown()
@@ -196,13 +150,22 @@ public class Shooting : MonoBehaviour
         {
             StopCoroutine(shootingCooldown);
         }
-        shootingCooldown = StartCooldown(firerates[currentWeapon]);
+        shootingCooldown = StartShootingCooldown(firerates[currentWeapon]);
         StartCoroutine(shootingCooldown);
+    }
+
+    public IEnumerator StartShootingCooldown(float time)
+    {
+        canShoot = false;
+        inCoroutine = true;
+        yield return new WaitForSeconds(time);
+        canShoot = true;
+        inCoroutine = false;
     }
 
     private bool CheckIfCanShoot()
     {
-        return (canShoot && !isReloading && ammoCurrent[currentWeapon] != 0 && !pauseMenu.GetPausedStatus());
+        return (canShoot && !isReloading && ammoCurrent[currentWeapon] != 0 && Time.timeScale != 0f);
     }
 
 }

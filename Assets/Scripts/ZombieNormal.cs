@@ -6,47 +6,29 @@ public class ZombieNormal : MonoBehaviour
 {
     private GameObject player;
     public Rigidbody2D rb;
-    public Animator animator;
 
-    public GameObject zombieHealthBarPrefab;
-    private GameObject healthbar;
-
-    private int health = 100;
+    public Zombie universalZomieScript;
 
     public float movementSpeed = 1.5f;
-    private bool canAttack = true;
     private float attackCooldownTime = 2.0f;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        healthbar = Instantiate(zombieHealthBarPrefab);
-        healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
-        healthbar.GetComponent<HealthBar>().SetHealth(health);
-        MoveHealthBar();
-
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveTowardsPlayer();
-        MoveHealthBar();
-
-        if (health <= 0)
-        {
-            Destroy(this.gameObject);
-            Destroy(healthbar);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.name == "Player" && canAttack)
+        if (collision.collider.gameObject.name == "Player" && universalZomieScript.canAttack)
         {
             collision.collider.gameObject.GetComponent<Player>().TakeDamage(25);
-            StartCoroutine(AttackCooldown());
+            StartCoroutine(universalZomieScript.AttackCooldown(attackCooldownTime));
         }
     }
 
@@ -59,23 +41,5 @@ public class ZombieNormal : MonoBehaviour
         rb.rotation = angle;
     }
 
-    public void TakeDamage(int damage)
-    {
-        animator.SetTrigger("Start");
-        health -= damage;
-        healthbar.GetComponent<HealthBar>().SetHealth(health);
-    }
-
-    IEnumerator AttackCooldown()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooldownTime);
-        canAttack = true;
-    }
-
-    private void MoveHealthBar()
-    {
-        healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
-    }
 
 }

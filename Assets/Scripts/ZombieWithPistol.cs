@@ -6,42 +6,25 @@ public class ZombieWithPistol : MonoBehaviour
 {
     private GameObject player;
     public Rigidbody2D rb;
-    public Animator animator;
 
     public GameObject pistolBulletPrefab;
     public Transform firePoint;
     public Animator muzzleFlashAnimator;
 
-    public GameObject zombieHealthBarPrefab;
-    private GameObject healthbar;
-
-    private int health = 150;
+    public Zombie universalZomieScript;
 
     public float movementSpeed = 1.0f;
-    private bool canAttack = true;
     private float attackCooldownTime = 0.75f;
     private float bulletForce = 5f;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        healthbar = Instantiate(zombieHealthBarPrefab);
-        healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
-        healthbar.GetComponent<HealthBar>().SetHealth(health);
-        MoveHealthBar();
     }
 
     void Update()
     {
         MoveTowardsPlayer();
-        MoveHealthBar();
-
-        if (health <= 0)
-        {
-            Destroy(this.gameObject);
-            Destroy(healthbar);
-        }
 
         if (!(Vector3.Distance(transform.position, player.transform.position) > 6))
         {
@@ -60,16 +43,9 @@ public class ZombieWithPistol : MonoBehaviour
         rb.rotation = angle;
     }
 
-    public void TakeDamage(int damage)
-    {
-        animator.SetTrigger("Start");
-        health -= damage;
-        healthbar.GetComponent<HealthBar>().SetHealth(health);
-    }
-
     void Shoot()
     {
-        if (!canAttack)
+        if (!universalZomieScript.canAttack)
         {
             return;
         }
@@ -80,18 +56,7 @@ public class ZombieWithPistol : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
 
-        StartCoroutine(AttackCooldown(attackCooldownTime));
+        StartCoroutine(universalZomieScript.AttackCooldown(attackCooldownTime));
     }
 
-    IEnumerator AttackCooldown(float attackCooldownTime)
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooldownTime);
-        canAttack = true;
-    }
-
-    private void MoveHealthBar()
-    {
-        healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
-    }
 }
