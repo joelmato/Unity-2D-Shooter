@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public GameObject hitEffect;
     public AudioSource shotSound;
 
+    private bool hasExploded = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((collision.collider.gameObject.tag == "ShotgunBullet" && tag == "ShotgunBullet") 
@@ -18,8 +20,14 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        explodeBullet();
-       
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Creatures"))
+        {
+            explodeBullet(Color.red);
+        } 
+        else
+        {
+            explodeBullet(Color.white);
+        }
     }
 
     private void Awake()
@@ -27,9 +35,12 @@ public class Bullet : MonoBehaviour
         shotSound.Play();
     }
 
-    public void explodeBullet()
+    public void explodeBullet(Color color)
     {
+        Debug.Log("ex");
+        hasExploded = true;
         GameObject explosionEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        explosionEffect.GetComponent<SpriteRenderer>().color = color;
         Destroy(explosionEffect, 0.3f);
 
         // Disables components of the bullet in order to make it unable to interact with other objects and to make it invisible
@@ -45,9 +56,9 @@ public class Bullet : MonoBehaviour
     public IEnumerator DelayExplosion(GameObject bullet, float time)
     {
         yield return new WaitForSeconds(time);
-        if (bullet != null)
+        if (bullet != null && !hasExploded)
         {
-            bullet.GetComponent<Bullet>().explodeBullet();
+            bullet.GetComponent<Bullet>().explodeBullet(Color.white);
         }
     }
 
