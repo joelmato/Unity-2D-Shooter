@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject spawner;
     public Rigidbody2D rb;
     public Animator animator;
 
@@ -18,7 +18,7 @@ public class Zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        spawner = GameObject.FindGameObjectWithTag("Spawner");
 
         healthbar = Instantiate(zombieHealthBarPrefab);
         healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
@@ -33,6 +33,7 @@ public class Zombie : MonoBehaviour
 
         if (health <= 0)
         {
+            spawner.GetComponent<Spawner>().SpawnPowerUp(transform.position);
             Destroy(this.gameObject);
             Destroy(healthbar);
         }

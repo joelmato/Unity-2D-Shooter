@@ -31,6 +31,16 @@ public class Player : MonoBehaviour
         StartCoroutine(WaitBeforeTakingDamage(shakeDuration, damage)); // Delays registering the damage taken until the camera shake is done
     }
 
+    public void Heal(int healAmount)
+    {
+        if (currentHealth < 100)
+        {
+            animator.SetTrigger("Heal");
+            currentHealth += healAmount;
+        }
+        healthBar.SetHealth(currentHealth);
+    }
+
     IEnumerator WaitBeforeTakingDamage(float waitTime, int damage)
     {
         yield return new WaitForSeconds(waitTime);

@@ -11,6 +11,8 @@ TagManager:
   - ZombieWithShotgun
   - ZombieShotgunBullet
   - Zombie
+  - HeartPowerUp
+  - Spawner
   layers:
   - Default
   - TransparentFX

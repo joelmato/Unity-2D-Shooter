@@ -37,7 +37,6 @@ public class Bullet : MonoBehaviour
 
     public void explodeBullet(Color color)
     {
-        Debug.Log("ex");
         hasExploded = true;
         GameObject explosionEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         explosionEffect.GetComponent<SpriteRenderer>().color = color;

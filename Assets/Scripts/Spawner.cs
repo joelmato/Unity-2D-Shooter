@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour
     public GameObject zombieWithPistolPrefab;
     public GameObject zombieWithShotgunPrefab;
 
+    public GameObject heartPowerUpPrefab;
+
     private bool canSpawn = true;
     private float spawnRate = 30;
 
@@ -52,5 +54,16 @@ public class Spawner : MonoBehaviour
         canSpawn = false;
         yield return new WaitForSeconds(spawnRate);
         canSpawn = true;
+    }
+
+    public void SpawnPowerUp(Vector3 position)
+    {
+        float random = Random.Range(0, 10);
+
+        if (random < 5)
+        {
+            GameObject heartPowerUp = Instantiate(heartPowerUpPrefab, position, Quaternion.identity);
+            heartPowerUp.transform.position = position;
+        }
     }
 }
