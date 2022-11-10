@@ -15,6 +15,8 @@ public class Spawner : MonoBehaviour
     private bool canSpawn = true;
     private float spawnRate = 30;
 
+    public int numberOfHearts = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,10 +62,13 @@ public class Spawner : MonoBehaviour
     {
         float random = Random.Range(0, 10);
 
-        if (random < 5)
+        if (random < 2)
         {
-            GameObject heartPowerUp = Instantiate(heartPowerUpPrefab, position, Quaternion.identity);
-            heartPowerUp.transform.position = position;
+            if (!(numberOfHearts >= 2))
+            {
+                GameObject heartPowerUp = Instantiate(heartPowerUpPrefab, position, Quaternion.identity);
+                numberOfHearts++;
+            }
         }
     }
 }

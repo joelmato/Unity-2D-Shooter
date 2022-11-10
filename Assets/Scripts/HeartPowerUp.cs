@@ -7,6 +7,12 @@ public class HeartPowerUp : MonoBehaviour
 {
     public int healingAmount = 25;
     public AudioSource pickupSound;
+    private GameObject spawner;
+
+    private void Start()
+    {
+        spawner = GameObject.FindGameObjectWithTag("Spawner");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,6 +30,7 @@ public class HeartPowerUp : MonoBehaviour
         }
         pickupSound.Play();
         collision.GetComponent<Player>().Heal(healingAmount);
+        spawner.GetComponent<Spawner>().numberOfHearts--;
 
         // Disables components of the HeartPowerUp in order to make it unable to interact with other objects and to make it invisible
         gameObject.GetComponent<Rigidbody2D>().Sleep();
