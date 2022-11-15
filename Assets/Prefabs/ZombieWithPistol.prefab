@@ -145,6 +145,7 @@ MonoBehaviour:
   zombieHealthBarPrefab: {fileID: 4909515770331329600, guid: b10e22187fe9e4d46a3d66cde87cc867, type: 3}
   health: 150
   canAttack: 1
+  canTakeDamage: 1
 --- !u!114 &5842354903467988227
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class Zombie : MonoBehaviour
     public int health = 100;
 
     public bool canAttack = true;
+    public bool canTakeDamage = true;
 
     // Start is called before the first frame update
     void Start()
@@ -29,27 +30,41 @@ public class Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveHealthBar();
+        if (healthbar != null) MoveHealthBar();
 
         if (health <= 0)
         {
+            if (gameObject.GetComponent<ZombieWithBomb>() != null)
+            {
+                gameObject.GetComponent<ZombieWithBomb>().SpawnBomb();
+            }
             spawner.GetComponent<Spawner>().SpawnPowerUp(transform.position);
             Destroy(this.gameObject);
-            Destroy(healthbar);
+
+            if (healthbar != null) Destroy(healthbar);
         }
     }
 
     public void TakeDamage(int damage)
     {
-        animator.SetTrigger("Start");
-        health -= damage;
-        healthbar.GetComponent<HealthBar>().SetHealth(health);
+        if (canTakeDamage)
+        {
+            animator.SetTrigger("Start");
+            health -= damage;
+            if (healthbar != null) healthbar.GetComponent<HealthBar>().SetHealth(health);
+        }
     }
 
     private void MoveHealthBar()
     {
         healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
     }
+
+    public void RemoveHealhBar()
+    {
+        Destroy(healthbar);
+    }
+
     public IEnumerator AttackCooldown(float attackCooldownTime)
     {
         canAttack = false;

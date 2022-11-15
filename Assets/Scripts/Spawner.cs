@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     public GameObject zombieNormalPrefab;
     public GameObject zombieWithPistolPrefab;
     public GameObject zombieWithShotgunPrefab;
+    public GameObject zombieWithBombPrefab;
 
     public GameObject heartPowerUpPrefab;
 
@@ -43,7 +44,7 @@ public class Spawner : MonoBehaviour
             zombie.transform.position = spawnpoints[0].transform.position;
             zombieWP.transform.position = spawnpoints[1].transform.position;
 
-            GameObject zombie2 = Instantiate(zombieNormalPrefab);
+            GameObject zombie2 = Instantiate(zombieWithBombPrefab);
             GameObject zombieWP2 = Instantiate(zombieWithShotgunPrefab);
             zombie2.transform.position = spawnpoints[2].transform.position;
             zombieWP2.transform.position = spawnpoints[3].transform.position;
