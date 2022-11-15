@@ -22,11 +22,13 @@ public class Shooting : MonoBehaviour
     public bool isReloading = false;
     public int currentWeapon = 0;
 
-    private int[] ammoTotal = { 10, 4, 40 }; // Stores all values for total ammo amount per magazine for all weapons, { pistol, shotgun, rifle}
-    private int[] ammoCurrent = { 10, 4, 40 }; // Stores all values for current ammo amount for all weapons, { pistol, shotgun, rifle}
-    private float[] bulletForces = { 20f, 35f, 25f }; // Stores all values for bullet forces for all weapons, { pistol, shotgun, rifle}
-    private float[] reloadDurations = { 1.5f, 2.0f, 3.0f }; // Stores all values for reload times for all weapons, { pistol, shotgun, rifle}
-    private float[] firerates = { 0.75f, 1.5f, 0.1f }; // Stores all values for time between shots for all weapons, { pistol, shotgun, rifle}
+    // Arrays that store values for total ammo amount per magazine, current ammo amount, bullet forces,
+    // reload times and firerates for all weapons { pistol, shotgun, rifle}
+    private int[] ammoTotal = { 10, 4, 40 }; 
+    private int[] ammoCurrent = { 10, 4, 40 }; 
+    private float[] bulletForces = { 20f, 35f, 25f }; 
+    private float[] reloadDurations = { 1.5f, 2.0f, 3.0f }; 
+    private float[] firerates = { 0.75f, 1.5f, 0.1f }; 
 
     private IEnumerator shootingCooldown;
     private bool inCoroutine = false;
@@ -51,8 +53,8 @@ public class Shooting : MonoBehaviour
 
         if (Input.GetButtonDown("Reload") && ammoCurrent[currentWeapon] != ammoTotal[currentWeapon] && !isReloading)
         {
-            StartCoroutine(StartReloadTimer(reloadDurations[currentWeapon]));
-            reloadingProgressBar.StartTimer(reloadDurations[currentWeapon]);
+            StartCoroutine(StartReloadTimer(reloadDurations[currentWeapon])); // Starts the reload timer coroutine
+            reloadingProgressBar.StartTimer(reloadDurations[currentWeapon]); // Starts the reload timer animation
         }
 
         SwitchWeapon();
@@ -61,11 +63,13 @@ public class Shooting : MonoBehaviour
 
     void SwitchWeapon()
     {
+        // Prevents the player from switching weapons if the weapon if reloading or the game is paused
         if (isReloading || Time.timeScale == 0f)
         {
             return;
         }
 
+        // Changes currently equipped weapon if the player presses 1, 2, or 3
         if (Input.GetKeyDown("1") && currentWeapon != 0)
         {
             currentWeapon = 0;
@@ -91,9 +95,10 @@ public class Shooting : MonoBehaviour
     {
         ammoCurrent[currentWeapon]--;
 
-        muzzleFlashAnimator.SetTrigger("Start");
-        StartCoroutine(cameraShake.Shake(0.10f, 0.15f));
+        muzzleFlashAnimator.SetTrigger("Start"); // Plays the muzzle flash animation
+        StartCoroutine(cameraShake.Shake(0.10f, 0.15f)); // Shakes the camera
 
+        // Creates and shoots out a pistol bullet from the firepoint
         GameObject bullet = Instantiate(pistolBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
@@ -105,15 +110,16 @@ public class Shooting : MonoBehaviour
     {
         ammoCurrent[currentWeapon]--;
 
-        muzzleFlashAnimator.SetTrigger("Start");
-        StartCoroutine(cameraShake.Shake(0.10f, 0.2f));
+        muzzleFlashAnimator.SetTrigger("Start"); // Plays the muzzle flash animation
+        StartCoroutine(cameraShake.Shake(0.10f, 0.2f)); // Shakes the camera
 
+        // Creates and shoots out 7 shotgun bullets at random angles between -10 and 10 degrees from the firepoint
         for (int i = 0; i < 8; i++)
         {
             float randomAngle = Random.Range(-10f, 10f);
             GameObject bullet = Instantiate(shotgunBulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            Vector3 newVector = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * firePoint.up;
+            Vector3 newVector = Quaternion.AngleAxis(randomAngle, new Vector3(0, 0, 1)) * firePoint.up; // Gets a vector with a random angle between -10 and 10 degrees from the firepoint
             rb.AddForce(newVector * bulletForces[currentWeapon], ForceMode2D.Impulse);
 
             StartCoroutine(bullet.GetComponent<Bullet>().DelayExplosion(bullet, 0.2f));
@@ -126,9 +132,10 @@ public class Shooting : MonoBehaviour
     {
         ammoCurrent[currentWeapon]--;
 
-        muzzleFlashAnimator.SetTrigger("Start");
-        StartCoroutine(cameraShake.Shake(0.10f, 0.05f));
+        muzzleFlashAnimator.SetTrigger("Start"); // Plays the muzzle flash animation
+        StartCoroutine(cameraShake.Shake(0.10f, 0.05f)); // Shakes the camera
 
+        // Creates and shoots out a rifle bullet from the firepoint
         GameObject bullet = Instantiate(rifleBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForces[currentWeapon], ForceMode2D.Impulse);
@@ -139,6 +146,7 @@ public class Shooting : MonoBehaviour
     public IEnumerator StartReloadTimer(float time)
     {
         isReloading = true;
+        // Wait until the weapon is done reloading before setting the current ammo value to the max ammo value
         yield return new WaitForSeconds(time);
         ammoCurrent[currentWeapon] = ammoTotal[currentWeapon];
         isReloading = false;
@@ -146,10 +154,13 @@ public class Shooting : MonoBehaviour
 
     private void WeaponCooldown()
     {
+        // Stops the shooting cooldown coroutine if the weapon is already in a coroutine
+        // to prevent not being able to shoot after switching weapons immediately after shooting
         if (inCoroutine)
         {
             StopCoroutine(shootingCooldown);
         }
+
         shootingCooldown = StartShootingCooldown(firerates[currentWeapon]);
         StartCoroutine(shootingCooldown);
     }

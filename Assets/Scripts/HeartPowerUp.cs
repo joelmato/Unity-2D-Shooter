@@ -16,6 +16,7 @@ public class HeartPowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Picks up the HeartPowerUp if the GameObject colliding with the power up is the player
         if (collision.CompareTag("Player"))
         {
             PickUp(collision);
@@ -24,12 +25,14 @@ public class HeartPowerUp : MonoBehaviour
 
     private void PickUp(Collider2D collision)
     {
-        if(collision.GetComponent<Player>().currentHealth == 100)
+        // Returns if the player has full health in order to prevent the player from "wasting" the pickup
+        if (collision.GetComponent<Player>().currentHealth == 100)
         {
             return;
         }
+
         pickupSound.Play();
-        collision.GetComponent<Player>().Heal(healingAmount);
+        collision.GetComponent<Player>().Heal(healingAmount); // Heals the player
         spawner.GetComponent<Spawner>().numberOfHearts--;
 
         // Disables components of the HeartPowerUp in order to make it unable to interact with other objects and to make it invisible

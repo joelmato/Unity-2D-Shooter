@@ -16,6 +16,7 @@ public class AmmoDisplay : MonoBehaviour
     public Sprite[] characterSprites;
     public SpriteRenderer spriteRenderer;
 
+    // Updates the ammo counter display on the player HUD
     public void UpdateAmmoDisplay(float ammoCurrent, float ammoTotal)
     {
         if (ammoCurrent == 0)
@@ -30,6 +31,7 @@ public class AmmoDisplay : MonoBehaviour
         ammoCurrentDisplay.text = ammoCurrent.ToString();
     }
 
+    // Updates the ammo sprites on the player HUD to represent the equipped weapon
     public void UpdateAmmoSprite(int currentWeapon)
     {
         ammoSprite.sprite = ammoSprites[currentWeapon];

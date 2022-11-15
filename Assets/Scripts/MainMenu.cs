@@ -13,8 +13,6 @@ public class MainMenu : MonoBehaviour
     public GameObject settings;
     public TMP_Dropdown resolutionDropdown;
 
-    Resolution[] screenResolutions;
-
     void Start()
     {
         CursorController.instance.SetPointer();
@@ -22,27 +20,28 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
+        // Loads the main game scene
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("Main"));
-        //SceneManager.LoadScene("Main");
+
         Time.timeScale = 1.0f;
     }
 
     public void ShowControls()
     {
-        gameObject.SetActive(false);
-        controlsDisplay.SetActive(true);
+        gameObject.SetActive(false); // Hides the main menu
+        controlsDisplay.SetActive(true); // Shows the game controls screen
     }
 
     public void ShowSettings()
     {
-        gameObject.SetActive(false);
-        settings.SetActive(true);
+        gameObject.SetActive(false); // Hides the main menu
+        settings.SetActive(true); // Shows the settings screen
     }
 
     public void Back()
     {
-        gameObject.SetActive(true);
-        controlsDisplay.SetActive(false);
+        gameObject.SetActive(true); // Shows the main menu
+        controlsDisplay.SetActive(false); // Hides the game controls screen
     }
 
     public void ExitGame()

@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // The if-statement prevents shotgun-pellets from exploding when colliding with each other
+        // in order to prevent them from exploding immediately after being instantiated inside of each other
         if ((collision.collider.gameObject.tag == "ShotgunBullet" && tag == "ShotgunBullet") 
             || (collision.collider.gameObject.tag == "ZombieShotgunBullet" && tag == "ZombieShotgunBullet"))
         {
@@ -22,11 +24,11 @@ public class Bullet : MonoBehaviour
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Creatures"))
         {
-            explodeBullet(Color.red);
+            explodeBullet(Color.red); // Red explosion if the bullet hits an enemy target
         } 
         else
         {
-            explodeBullet(Color.white);
+            explodeBullet(Color.white); // White explosion if the bullet hits something that is not an enemy target
         }
     }
 
@@ -52,6 +54,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, shotSound.clip.length);
         
     }
+
+    // Explodes a bullet after a certain amount of time has passed
+    // This is used for the shotgun weapon type
     public IEnumerator DelayExplosion(GameObject bullet, float time)
     {
         yield return new WaitForSeconds(time);

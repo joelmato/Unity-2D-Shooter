@@ -24,10 +24,10 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
-        screenResolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
+        screenResolutions = Screen.resolutions; // Gets the available screen resolutions for the display the game is running on
+        resolutionDropdown.ClearOptions(); 
 
-        // Fills the resolution dropdown with all possible resolutions for the system the game is running on
+        // Fills the resolution dropdown with all possible resolutions for the display the game is running on
         List<string> options = new List<string>();
         int index = 0;
         for (int i = 0; i < screenResolutions.Length; i++)
@@ -35,6 +35,7 @@ public class Settings : MonoBehaviour
             string option = screenResolutions[i].width + "x" + screenResolutions[i].height + " " + screenResolutions[i].refreshRate + "Hz";
             options.Add(option);
 
+            // Sets the index value if the resolution from the available resolutions match the current resolution of the display
             if (screenResolutions[i].width == Screen.width && screenResolutions[i].height == Screen.height && screenResolutions[i].refreshRate == Screen.currentResolution.refreshRate)
             {
                 index = i;
@@ -44,6 +45,7 @@ public class Settings : MonoBehaviour
         resolutionDropdown.value = index;
         resolutionDropdown.RefreshShownValue();
 
+        // Updates all the volume sliders to match the values of the audio mixer
         UpdateMasterSlider();
         UpdateSFXSlider();
         UpdateMusicSlider();
@@ -51,8 +53,8 @@ public class Settings : MonoBehaviour
 
     public void BackFromSettings()
     {
-        mainMenu.SetActive(true);
-        gameObject.SetActive(false);
+        mainMenu.SetActive(true); // Shows the main menu
+        gameObject.SetActive(false); // Hides the settings screen
     }
 
     public void SetFullscreen(bool fullscreen)
@@ -68,7 +70,6 @@ public class Settings : MonoBehaviour
 
     public void SetMasterVolume(float decimalVolume)
     {
-
         audioMixer.SetFloat("VolumeMaster", DecimalToDB(decimalVolume));
     }
 
@@ -82,6 +83,7 @@ public class Settings : MonoBehaviour
         audioMixer.SetFloat("VolumeMusic", DecimalToDB(decimalVolume));
     }
 
+    // Method that converts a decimal value to a decibel value
     private float DecimalToDB(float decimalValue)
     {
         var dbValue = Mathf.Log10(decimalValue) * 20;
@@ -94,6 +96,7 @@ public class Settings : MonoBehaviour
         return dbValue;
     }
 
+    // Method that converts a decibel value to a decimal value
     private float DBToDecimal(float dbValue)
     {
         var decimalValue = Mathf.Pow(10, dbValue / 20);
@@ -106,6 +109,7 @@ public class Settings : MonoBehaviour
         return decimalValue;
     }
 
+    // Method that sets the value of the master volume slider to the value of the master volume from the audio mixer
     private void UpdateMasterSlider()
     {
         bool value = audioMixer.GetFloat("VolumeMaster", out masterVolume);
@@ -119,6 +123,7 @@ public class Settings : MonoBehaviour
         }
     }
 
+    // Method that sets the value of the SFX volume slider to the value of the SFX volume from the audio mixer
     private void UpdateSFXSlider()
     {
         bool value = audioMixer.GetFloat("VolumeSFX", out sfxVolume);
@@ -133,6 +138,7 @@ public class Settings : MonoBehaviour
         }
     }
 
+    // Method that sets the value of the music volume slider to the value of the music volume from the audio mixer
     private void UpdateMusicSlider()
     {
         bool value = audioMixer.GetFloat("VolumeMusic", out musicVolume);

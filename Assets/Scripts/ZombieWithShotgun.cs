@@ -26,6 +26,7 @@ public class ZombieWithShotgun : MonoBehaviour
     {
         MoveTowardsPlayer();
 
+        // Shoots if the ZombieWithShotgun object is a certain distance away from the player
         if (!(Vector3.Distance(transform.position, player.transform.position) > 5))
         {
             Shoot();
@@ -33,13 +34,14 @@ public class ZombieWithShotgun : MonoBehaviour
     }
     void MoveTowardsPlayer()
     {
+        // Moves the ZombieWithShotgun object towards the player if it is a certain distance away
         if (Vector3.Distance(transform.position, player.transform.position) > 5)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
         }
-        Vector2 lookDirection = player.GetComponent<Rigidbody2D>().position - rb.position;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 90f;
-        rb.rotation = angle;
+        Vector2 lookDirection = player.GetComponent<Rigidbody2D>().position - rb.position; // Gets the direction of the player relative to the ZombieWithShotgun object
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 90f; // Gets the angle between the player and the ZombieWithShotgun object
+        rb.rotation = angle; // Updates the angle of the ZombieWithShotgun object in order to point it towards the player
     }
 
 
@@ -50,8 +52,9 @@ public class ZombieWithShotgun : MonoBehaviour
             return;
         }
 
-        muzzleFlashAnimator.SetTrigger("Start");
+        muzzleFlashAnimator.SetTrigger("Start"); // Plays the muzzle flash animation
 
+        // Creates 3 shotgun bullets and shoots them out at -25, 0, and 25 degrees 
         for (float i = -25.0f; i <= 25.0f; i += 25.0f)
         {
             GameObject bullet = Instantiate(shotgunBulletPrefab, firePoint.position, firePoint.rotation);
@@ -59,7 +62,7 @@ public class ZombieWithShotgun : MonoBehaviour
             Vector3 newVector = Quaternion.AngleAxis(i, new Vector3(0, 0, 1)) * firePoint.up;
             rb.AddForce(newVector * bulletForce, ForceMode2D.Impulse);
 
-            StartCoroutine(bullet.GetComponent<Bullet>().DelayExplosion(bullet, 1.5f));
+            StartCoroutine(bullet.GetComponent<Bullet>().DelayExplosion(bullet, 1.5f)); // Starts a coroutine that explodes the bullets after 1.5s have passed
         }
 
         StartCoroutine(universalZomieScript.AttackCooldown(attackCooldownTime));

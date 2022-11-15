@@ -20,9 +20,10 @@ public class GameOver : MonoBehaviour
         if (player.currentHealth <= 0 && !gameOver)
         {
 
-            gameOverUI.SetActive(true);
+            gameOverUI.SetActive(true); // Displays the game over screen
             gameUI.alpha = 0.5f;
             Time.timeScale = 0f;
+
             shootingScript.canShoot = false;
             shootingScript.isReloading = true;
             gameOver = true;
@@ -33,15 +34,18 @@ public class GameOver : MonoBehaviour
     public void Retry()
     {
         player.currentHealth = player.maxHealth;
+
+        // Reloads the same scene in order to restart the game
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene(SceneManager.GetActiveScene().name));
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         Time.timeScale = 1.0f;
     }
 
     public void Quit()
     {
+        // Loads the main menu scene
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("MainMenu"));
-        //SceneManager.LoadScene("MainMenu");
+
         Time.timeScale = 1.0f;
     }
 }

@@ -13,16 +13,14 @@ public class TimerDisplay : MonoBehaviour
     private float secondsCount = 0;
     private int minutesCount = 0;
 
-
-    // Update is called once per frame
     void Update()
     {
         UpdateTimer();
     }
 
+    // Updates the timer in the top right of the game to display the current active game time
     public void UpdateTimer()
     {
-
         secondsCount += Time.deltaTime;
         seconds.text = ((int)secondsCount).ToString();
         minutes.text = minutesCount.ToString();

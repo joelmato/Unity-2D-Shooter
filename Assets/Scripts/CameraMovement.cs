@@ -10,9 +10,9 @@ public class CameraMovement : MonoBehaviour
     public float cameraZ = -10f;
     Vector2 position;
 
-    // Update is called once per frame
     void Update()
     {
+        // Updates the vector containing the new position for the camera to move to
         Vector3 playerPosition = new Vector3(player.position.x, player.position.y, cameraZ);
         position = Vector2.Lerp(transform.position, playerPosition, moveSpeed);
 
@@ -20,8 +20,7 @@ public class CameraMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Updates the position of the camera
         transform.position = new Vector3(position.x, position.y, cameraZ) ;
-        
     }
-   
 }

@@ -18,15 +18,17 @@ public class Bomb : MonoBehaviour
 
     IEnumerator ExplodeBomb()
     {
+        // Waits until the bomb timer has finished before showing the bomb explosion effect,
+        // playing the sound effect, and damaging the player
         yield return new WaitForSeconds(bombExplosionTimer);
         explosionSoundEffect.Play();
         GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(explosion, 0.55f);
-
         bombRadiusCircle.GetComponent<BombRadiusCircle>().DamagePlayer(bombDamage);
 
-        yield return new WaitForSeconds(explosionSoundEffect.clip.length);
-
+        // Waits until the sound effects has finished playing before destroying
+        // the gameObject in order to prevent the audio from cutting off
+        yield return new WaitForSeconds(explosionSoundEffect.clip.length); 
         Destroy(gameObject);
     }
 }

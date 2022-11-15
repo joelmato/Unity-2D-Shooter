@@ -14,7 +14,7 @@ public class ReloadingProgressBar : MonoBehaviour
     private bool runTimer = false;
 
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (timeLeft > 0 && runTimer)
@@ -27,9 +27,9 @@ public class ReloadingProgressBar : MonoBehaviour
 
     public void StartTimer(float newTimeMax)
     {
-        gameObject.SetActive(true);
-        timeMax = newTimeMax;
-        timeLeft = timeMax;
+        gameObject.SetActive(true); // Shows the timer bar
+        timeMax = newTimeMax; 
+        timeLeft = timeMax; 
         runTimer = true;
 
     }
@@ -37,6 +37,6 @@ public class ReloadingProgressBar : MonoBehaviour
     private void StopTimer()
     {
         runTimer = false;
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); // Hides the timer bar
     }
 }

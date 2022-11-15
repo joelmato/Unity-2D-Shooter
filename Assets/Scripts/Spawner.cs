@@ -18,13 +18,6 @@ public class Spawner : MonoBehaviour
 
     public int numberOfHearts = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (canSpawn)
@@ -33,12 +26,11 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    // Method that spawns/instantiates zombies at the spawn points
     void SpawnZombies()
     {
-
         for (int i = 0; i < 1; i++)
         {
-            //int random = Random.Range(0, spawnpoints.Length);
             GameObject zombie = Instantiate(zombieNormalPrefab);
             GameObject zombieWP = Instantiate(zombieWithPistolPrefab);
             zombie.transform.position = spawnpoints[0].transform.position;
@@ -61,10 +53,11 @@ public class Spawner : MonoBehaviour
 
     public void SpawnPowerUp(Vector3 position)
     {
-        float random = Random.Range(0, 10);
+        float random = Random.Range(1, 11);
 
-        if (random < 2)
+        if (random < 3)
         {
+            // Spawns a heartPowerUp if the number of heartPowerUps currently in the game is less than two
             if (!(numberOfHearts >= 2))
             {
                 GameObject heartPowerUp = Instantiate(heartPowerUpPrefab, position, Quaternion.identity);

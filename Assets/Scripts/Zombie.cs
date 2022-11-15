@@ -16,31 +16,32 @@ public class Zombie : MonoBehaviour
     public bool canAttack = true;
     public bool canTakeDamage = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         spawner = GameObject.FindGameObjectWithTag("Spawner");
 
+        // Creates a healthbar, updates its values and moves it to the zombie when the zombie is created/instantiated
         healthbar = Instantiate(zombieHealthBarPrefab);
         healthbar.GetComponent<HealthBar>().SetMaxHealth(health);
         healthbar.GetComponent<HealthBar>().SetHealth(health);
         MoveHealthBar();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (healthbar != null) MoveHealthBar();
 
         if (health <= 0)
         {
+            // Spawns a bomb on death if the zombie is of the type "ZombieWithBomb"
             if (gameObject.GetComponent<ZombieWithBomb>() != null)
             {
                 gameObject.GetComponent<ZombieWithBomb>().SpawnBomb();
             }
-            spawner.GetComponent<Spawner>().SpawnPowerUp(transform.position);
-            Destroy(this.gameObject);
 
+            spawner.GetComponent<Spawner>().SpawnPowerUp(transform.position); // Tries to spawn a power up at the location the zombie 
+
+            Destroy(this.gameObject);
             if (healthbar != null) Destroy(healthbar);
         }
     }
@@ -49,14 +50,15 @@ public class Zombie : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            animator.SetTrigger("Start");
+            animator.SetTrigger("Start"); // Plays the take-damage animation
             health -= damage;
-            if (healthbar != null) healthbar.GetComponent<HealthBar>().SetHealth(health);
+            if (healthbar != null) healthbar.GetComponent<HealthBar>().SetHealth(health); // Updates the value of the zombies healthBar if it exists
         }
     }
 
     private void MoveHealthBar()
     {
+        // Moves the healthBar to slightly above the zombie
         healthbar.transform.position = new Vector3(transform.position.x, transform.position.y + 0.75f, transform.position.z);
     }
 
