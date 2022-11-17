@@ -33,4 +33,14 @@ public class TimerDisplay : MonoBehaviour
 
 
     }
+
+    public string GetMinutes()
+    {
+        return minutesCount.ToString();
+    }
+
+    public string GetSeconds()
+    {
+        return ((int)secondsCount).ToString();
+    }
 }

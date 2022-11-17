@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,9 @@ public class GameOver : MonoBehaviour
     public Shooting shootingScript;
     public GameObject gameOverUI;
     public CanvasGroup gameUI;
+    public TimerDisplay timerDisplay;
+
+    public TextMeshProUGUI timeSurvivedForText;
 
     private bool gameOver = false;
 
@@ -27,6 +31,7 @@ public class GameOver : MonoBehaviour
             shootingScript.canShoot = false;
             shootingScript.isReloading = true;
             gameOver = true;
+            timeSurvivedForText.text = timerDisplay.GetMinutes() + ":" + timerDisplay.GetSeconds();
 
         }
     }

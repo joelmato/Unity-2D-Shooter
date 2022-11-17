@@ -79,12 +79,17 @@ public class Spawner : MonoBehaviour
     IEnumerator StartCooldown()
     {
         canSpawn = false;
+        int numberOfWaves = 0;
+
+        // Limits the value of numberOfWaves to 4
+        if (minutesCount <= 4) numberOfWaves = minutesCount;
+        else numberOfWaves = 4;
 
         SpawnZombies(false); // Spawns 4 random zombies
         yield return new WaitForSeconds(timeBetweenWaves);
 
         // 2 * minutesCount number of zombies are spawned
-        for (int i = 0; i < minutesCount; i++)
+        for (int i = 0; i < numberOfWaves; i++)
         {
             SpawnZombies(true); // Spawns 2 random zombies
 
@@ -92,7 +97,7 @@ public class Spawner : MonoBehaviour
         }
 
         // Waits until the next batch of zombies can spawn
-        yield return new WaitForSeconds(spawnRate - timeBetweenWaves - minutesCount * timeBetweenWaves);
+        yield return new WaitForSeconds(spawnRate - timeBetweenWaves - numberOfWaves * timeBetweenWaves);
         canSpawn = true;
     }
 
