@@ -15,7 +15,7 @@ public class ZombieWithPistol : MonoBehaviour
 
     public float movementSpeed = 1.0f;
     private float attackCooldownTime = 0.75f;
-    private float bulletForce = 5f;
+    private float bulletForce = 4f;
 
     void Start()
     {

@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
 
     private float shakeDuration = 0.10f;
     private float shakeMagnitude = 0.10f;
+    private float invulnerabilityTime = 0.25f;
+
+    private bool canTakeDamage = true;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +30,12 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (!canTakeDamage) return;
         animator.SetTrigger("Start"); // Plays the hurt-animation
         hurtSound.Play();
         StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude)); // Shakes the camera
         StartCoroutine(WaitBeforeTakingDamage(shakeDuration, damage)); // Delays registering the damage taken until the camera shake is done
+        StartCoroutine(InvulnerabilityTimer());
     }
 
     public void Heal(int healAmount)
@@ -49,5 +54,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth); // Updates the healthbar UI element
+    }
+
+    IEnumerator InvulnerabilityTimer()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(invulnerabilityTime);
+        canTakeDamage = true;
     }
 }
