@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !(player.currentHealth == 0))
+        if(Input.GetKeyDown(KeyCode.Escape) && !(player.currentHealth == 0) && transitionAnimator.GetComponent<SceneLoader>().canPauseGame)
         {
             if (isPaused)
             {
