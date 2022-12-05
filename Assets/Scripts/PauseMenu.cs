@@ -65,6 +65,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
+        player.currentHealth = player.maxHealth;
+
         // Loads the main menu scene
         StartCoroutine(transitionAnimator.GetComponent<SceneLoader>().LoadScene("MainMenu"));
 

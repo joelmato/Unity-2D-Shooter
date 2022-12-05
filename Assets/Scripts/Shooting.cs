@@ -27,7 +27,7 @@ public class Shooting : MonoBehaviour
     private int[] ammoTotal = { 10, 4, 40 }; 
     private int[] ammoCurrent = { 10, 4, 40 }; 
     private float[] bulletForces = { 20f, 35f, 25f }; 
-    private float[] reloadDurations = { 1.5f, 2.0f, 2.5f }; 
+    private float[] reloadDurations = { 1.25f, 1.75f, 2.0f }; 
     private float[] firerates = { 0.75f, 1.5f, 0.1f }; 
 
     private IEnumerator shootingCooldown;

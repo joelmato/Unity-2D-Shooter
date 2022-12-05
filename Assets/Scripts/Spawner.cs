@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour
             { zombieWithPistolPrefab , zombieWithPistolPrefab, zombieWithShotgunPrefab, zombieWithShotgunPrefab },
             { zombieNormalPrefab , zombieNormalPrefab, zombieWithPistolPrefab, zombieWithShotgunPrefab },
             { zombieWithPistolPrefab, zombieWithPistolPrefab, zombieWithBombPrefab, zombieWithBombPrefab },
-            { zombieWithShotgunPrefab, zombieWithShotgunPrefab, zombieWithBombPrefab, zombieWithBombPrefab },
+            { zombieWithShotgunPrefab, zombieWithPistolPrefab, zombieWithBombPrefab, zombieWithBombPrefab },
             { zombieNormalPrefab, zombieWithPistolPrefab, zombieWithShotgunPrefab, zombieWithBombPrefab },
         };
     }
@@ -82,8 +82,8 @@ public class Spawner : MonoBehaviour
         int numberOfWaves = 0;
 
         // Limits the value of numberOfWaves to 4
-        if (minutesCount <= 4) numberOfWaves = minutesCount;
-        else numberOfWaves = 4;
+        if (minutesCount <= 3) numberOfWaves = minutesCount;
+        else numberOfWaves = 3;
 
         SpawnZombies(false); // Spawns 4 random zombies
         yield return new WaitForSeconds(timeBetweenWaves);
