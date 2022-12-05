@@ -3,8 +3,6 @@ LocalCache/
 Temp/
 Obj/
 Logs/
-Build/
-Builds/
 
 # Visual Studio cache directory
 .vs/
